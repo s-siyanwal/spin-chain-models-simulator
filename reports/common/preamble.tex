@@ -1,0 +1,72 @@
+% Shared preamble for the expert and beginner reports.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\DisableLigatures{encoding = T1, family = tt*}  % keep -- as two hyphens in code
+\usepackage[a4paper,margin=2.3cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs,longtable,multirow,makecell}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc,decorations.pathreplacing}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{../figures/}}
+\setlength{\parskip}{0.45em}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}  % long code identifiers: loosen lines instead of overflowing
+\setlist{itemsep=0.15em,topsep=0.3em}
+\renewcommand{\arraystretch}{1.15}
+
+\definecolor{codebg}{RGB}{246,246,248}
+\definecolor{codekw}{RGB}{0,72,150}
+\definecolor{codecm}{RGB}{110,110,110}
+\definecolor{codestr}{RGB}{140,40,20}
+\definecolor{warn}{RGB}{176,64,0}
+\definecolor{okc}{RGB}{0,110,60}
+\definecolor{boxblue}{RGB}{225,236,250}
+\definecolor{boxamber}{RGB}{253,240,215}
+\definecolor{boxgreen}{RGB}{226,244,230}
+\definecolor{boxgray}{RGB}{238,238,238}
+
+\lstdefinestyle{py}{language=Python,basicstyle=\ttfamily\footnotesize,keywordstyle=\color{codekw}\bfseries,
+  commentstyle=\color{codecm}\itshape,stringstyle=\color{codestr},backgroundcolor=\color{codebg},
+  frame=single,rulecolor=\color{gray!40},breaklines=true,breakatwhitespace=false,columns=fullflexible,
+  keepspaces=true,showstringspaces=false,xleftmargin=0.5em,xrightmargin=0.5em,aboveskip=0.6em,belowskip=0.6em}
+\lstdefinestyle{sh}{basicstyle=\ttfamily\footnotesize,backgroundcolor=\color{codebg},frame=single,
+  rulecolor=\color{gray!40},breaklines=true,columns=fullflexible,keepspaces=true,showstringspaces=false,
+  xleftmargin=0.5em,xrightmargin=0.5em,aboveskip=0.6em,belowskip=0.6em}
+\lstset{style=py}
+
+\newtcolorbox{keybox}[1][]{colback=boxblue,colframe=codekw!70,boxrule=0.5pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,#1}
+\newtcolorbox{warnbox}[1][]{colback=boxamber,colframe=warn,boxrule=0.5pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,#1}
+\newtcolorbox{okbox}[1][]{colback=boxgreen,colframe=okc,boxrule=0.5pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,#1}
+\newtcolorbox{notebox}[1][]{colback=boxgray,colframe=gray!60,boxrule=0.5pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,fonttitle=\bfseries,#1}
+
+% Notation
+\newcommand{\kT}{k_{\mathrm{B}}T}
+\newcommand{\xiP}{\xi_{P}}
+\newcommand{\gl}{\gamma_{l}}
+\newcommand{\Pe}{\mathrm{Pe}}
+\newcommand{\Flex}{\mathfrak{F}}
+\newcommand{\spn}{\mathfrak{s}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+\newcommand{\NR}{\textbf{not a replication}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.3pt}
+\fancyfoot[C]{\thepage}

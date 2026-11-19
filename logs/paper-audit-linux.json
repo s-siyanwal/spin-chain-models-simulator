@@ -1,0 +1,41 @@
+{
+  "audit": {
+    "estimated_hours": 336.4127168958278,
+    "limitations": [
+      "Main paper says timestep was adjusted; exact per-run timestep is in ESI and is not embedded here.",
+      "LAMMPS special_bonds defaults exclude 1-2 and 1-3 LJ and scale 1-4 LJ to zero; lammps_default is therefore the primary hypothesis, but ESI/input scripts are required for certainty.",
+      "Quantitative phase-map replication requires independent runs over the published grid, not only three Figure-2 points."
+    ],
+    "paper_faithful": true,
+    "regime_parameters": {
+      "dt": 5e-05,
+      "epsilon": 1.0,
+      "f_p": 0.02,
+      "gamma": 1.0,
+      "k_s": 4000.0,
+      "kappa": 20.0,
+      "kbt": 1.0,
+      "length": 100.0,
+      "n_bonds": 100,
+      "nonbonded_policy": "lammps_default",
+      "pe": 200.0,
+      "r0": 1.0,
+      "seed": 12001,
+      "sigma_over_r0": 1.0,
+      "spring_factor": 4000.0,
+      "tau": 252500.0,
+      "xi_over_l": 0.2
+    },
+    "replicates": 3,
+    "steps_per_replicate": 25250000000,
+    "tau_units_per_replicate": 5.0,
+    "total_steps": 75750000000
+  },
+  "benchmark": {
+    "backend": "numba-cpu",
+    "projected_hours_per_tau": 22.427514459721856,
+    "seconds": 0.15987931099999741,
+    "steps": 10000,
+    "steps_per_second": 62547.17972859016
+  }
+}

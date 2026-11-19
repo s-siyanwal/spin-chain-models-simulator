@@ -1,0 +1,7 @@
+{
+  "backend": "numba-cpu",
+  "projected_hours_per_tau": 22.508640886110676,
+  "seconds": 0.3209152759999938,
+  "steps": 20000,
+  "steps_per_second": 62321.74500786427
+}

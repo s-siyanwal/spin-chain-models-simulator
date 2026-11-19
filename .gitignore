@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv*/
+venv/
+*.egg-info/
+# simulation outputs (large)
+output/
+*.h5
+*.hdf5
+*.npz
+*.gif
+.numba_cache/

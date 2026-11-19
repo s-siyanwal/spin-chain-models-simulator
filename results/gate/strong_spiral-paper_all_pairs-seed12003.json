@@ -1,0 +1,36 @@
+{
+  "com_check": {
+    "com_displacement": 225.51043103845078,
+    "com_equals_mean_of_positions": true,
+    "com_first": [
+      0.0,
+      6.302647639888276e-09
+    ],
+    "com_last": [
+      224.89729624438,
+      16.618081998983246
+    ],
+    "com_reset_detected": false,
+    "frames_after_start_with_abs_com_below_1e-9": 0
+  },
+  "d_r_fit": {
+    "D": 0.014278398056736539,
+    "points": 11,
+    "slope_tolerance": 0.1,
+    "t_max": 181.79999999999998,
+    "t_min": 126.25
+  },
+  "duration_tau": 0.008,
+  "film_frames": 134,
+  "film_stride_saved_frames": 3,
+  "fps": 12,
+  "gif": "output/gate\\strong_spiral-paper_all_pairs-seed12003.gif",
+  "max_abs_s": 1.504620986989335,
+  "passive_reference": null,
+  "png": "output/gate\\strong_spiral-paper_all_pairs-seed12003.png",
+  "replication_status": "not a replication: analysis window 0.008 tau < 5 tau",
+  "sample_every": 101000,
+  "saved_frames": 401,
+  "steps": 40400000,
+  "trajectory": "output/gate/strong_spiral-paper_all_pairs-seed12003.h5"
+}

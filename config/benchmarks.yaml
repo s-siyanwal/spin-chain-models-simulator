@@ -1,0 +1,5 @@
+# Figure 2 cases from Soft Matter 11, 7181 (2015).
+# lammps_default reflects the documented default special_bonds exclusion hypothesis.
+polymer: {Pe: 200, xi_p_over_L: 0.2, N_bonds: 100, sigma_over_r0: 1.0, seed: 12001, tau: 5.0}
+weak_spiral: {Pe: 1000, xi_p_over_L: 0.2, N_bonds: 100, sigma_over_r0: 1.0, seed: 12002, tau: 5.0}
+strong_spiral: {Pe: 5000, xi_p_over_L: 0.2, N_bonds: 100, sigma_over_r0: 1.0, seed: 12003, tau: 5.0}

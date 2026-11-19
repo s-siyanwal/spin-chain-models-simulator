@@ -1,0 +1,36 @@
+{
+  "com_check": {
+    "com_displacement": 197.42405008973682,
+    "com_equals_mean_of_positions": true,
+    "com_first": [
+      0.0,
+      6.302647639888276e-09
+    ],
+    "com_last": [
+      189.82572198142722,
+      54.24436218399633
+    ],
+    "com_reset_detected": false,
+    "frames_after_start_with_abs_com_below_1e-9": 0
+  },
+  "d_r_fit": {
+    "D": 0.017835611780320212,
+    "points": 4,
+    "slope_tolerance": 0.1,
+    "t_max": 222.2,
+    "t_min": 202.0
+  },
+  "duration_tau": 0.008,
+  "film_frames": 134,
+  "film_stride_saved_frames": 3,
+  "fps": 12,
+  "gif": "output/gate\\strong_spiral-lammps_default-seed12003.gif",
+  "max_abs_s": 1.6815284249166516,
+  "passive_reference": null,
+  "png": "output/gate\\strong_spiral-lammps_default-seed12003.png",
+  "replication_status": "not a replication: analysis window 0.008 tau < 5 tau",
+  "sample_every": 101000,
+  "saved_frames": 401,
+  "steps": 40400000,
+  "trajectory": "output/gate/strong_spiral-lammps_default-seed12003.h5"
+}
