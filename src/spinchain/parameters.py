@@ -22,6 +22,10 @@ class Parameters:
     def __post_init__(self):
         if self.n_bonds < 3 or self.r0 <= 0 or self.dt <= 0 or self.gamma <= 0 or self.kbt <= 0:
             raise ValueError("invalid positive physical parameter")
+        if self.r0 != 1.0:
+            # The printed bending energy kappa/4 sum|b_i-b_(i+1)|^2 (Eq. 4) is written in units of r0; with any other r0
+            # the persistence length would be xi_P*r0**3, not xi_P, so the label xi_P/L would be wrong.
+            raise ValueError("r0 must be 1: lengths are in units of the bond length r0 (Eq. 4 is written in those units)")
         if self.xi_over_l <= 0 or self.sigma_over_r0 <= 0:
             raise ValueError("xi_over_l and sigma_over_r0 must be positive")
         if self.nonbonded_policy not in POLICIES:

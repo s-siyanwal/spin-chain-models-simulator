@@ -19,7 +19,7 @@ Setup: strong_spiral (Pe = 5000, ξ_P/L = 0.2, N = 100), same integrator, 10 con
 
 The pass rule is unchanged and is the only test: consecutive saved frames with |s| > 2 lasting ≥ 2 contours, **and** stored COM == mean of stored positions with no reset.
 
-![four-curve gate](output/gate/gate4_s_t.png)
+![four-curve gate](results/gate/gate4_s_t.png)
 
 | Policy | Seed | max \|s\| | Longest \|s\|>2 run | COM == mean(positions) | COM reset | Gate |
 |---|---|---|---|---|---|---|

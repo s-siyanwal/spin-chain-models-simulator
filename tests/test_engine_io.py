@@ -22,3 +22,11 @@ def test_overwrite_refusal(tmp_path):
 def test_verlet_chunk_invariance():
     from spinchain.engine import advance_verlet
     q=p();a=straight(q);b=a.copy();advance_verlet(a,0,25,q);advance_verlet(b,0,10,q);advance_verlet(b,10,15,q);assert np.array_equal(a,b)
+
+@pytest.mark.parametrize('kw',[{'sample_every':0},{'sample_every':-5},{'chunk':0},{'angle_every':0},{'steps':-1}])
+def test_run_refuses_non_positive_cadence_before_creating_output(tmp_path,kw):
+    # sample_every=-5 used to "complete" while saving every chunk under a recorded cadence of -5, sample_every=0 raised
+    # ZeroDivisionError after the output file was created, and chunk=0 looped forever without advancing.
+    path=tmp_path/'bad.h5';args={'steps':10,'sample_every':5,**kw};steps=args.pop('steps')
+    with pytest.raises(ValueError):run(p(),steps,path,**args)
+    assert not path.exists()

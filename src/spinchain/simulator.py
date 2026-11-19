@@ -18,6 +18,11 @@ def _load_angle(checkpoint,p,step):
     return float(z['ee_angle']) if z.get('step')==step and z.get('fingerprint')==p.fingerprint() else None
 
 def run(p,steps,out,sample_every=5000,chunk=5000,checkpoint=None,resume=False,overwrite=False,wall_limit=0.0,save_positions=True,angle_every=ANGLE_EVERY):
+    # Checked before any file is opened: a non-positive cadence used to divide by zero, loop forever (chunk=0), or
+    # "complete" with frames saved off the recorded cadence (negative sample_every).
+    if int(steps)<0:raise ValueError(f'steps must be >= 0, got {steps}')
+    for name,v in (('sample_every',sample_every),('chunk',chunk),('angle_every',angle_every)):
+        if int(v)<1:raise ValueError(f'{name} must be a positive number of steps, got {v}')
     angle=None
     if resume:
         if not checkpoint or not os.path.exists(checkpoint):raise FileNotFoundError('resume requested but checkpoint is missing')
