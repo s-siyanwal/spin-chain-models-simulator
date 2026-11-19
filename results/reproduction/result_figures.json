@@ -1,0 +1,28 @@
+{
+  "com_displacement_full_run": 408.50176621667185,
+  "film": {
+    "box_half_width_r0": 24.59826585231656,
+    "film_frames": 196,
+    "follow": true,
+    "gif": "output/reproduction/result\\longest_plateau.gif",
+    "saved_frames": [
+      16969,
+      25000
+    ],
+    "t_contours": [
+      4242.25,
+      6250.0
+    ]
+  },
+  "panel": "output/reproduction/result\\result_panel.png",
+  "plateau_contours": 2007.75,
+  "plateau_samples": 8032,
+  "plateau_saved_frames": [
+    16969,
+    25000
+  ],
+  "plateau_tau": [
+    3.3938,
+    5.0
+  ]
+}

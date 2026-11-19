@@ -1,0 +1,11 @@
+{
+  "com_msd_slope_tail35": null,
+  "duration_tau": 1.98039603960396e-06,
+  "kp_re2_over_l2": 0.3205390357599268,
+  "mean_re2_over_l2": 0.9860162366349517,
+  "mean_rg_over_l_tail20": 0.28993559899580584,
+  "median_abs_spiral_tail20": 0.008071164035962267,
+  "rotation_msr_slope_tail35": null,
+  "samples": 4,
+  "spiral_kurtosis_tail20": 1.457829889668132
+}

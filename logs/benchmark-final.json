@@ -1,0 +1,18 @@
+{
+  "backend": "numba-cpu",
+  "selected": "verlet",
+  "steps": 50000,
+  "steps_per_second": 195465.78182277046,
+  "variants": {
+    "bruteforce": {
+      "projected_hours_per_tau": 22.47006710638889,
+      "seconds": 0.8009132829999999,
+      "steps_per_second": 62428.731126438324
+    },
+    "verlet": {
+      "projected_hours_per_tau": 7.176590013333799,
+      "seconds": 0.25579924800001663,
+      "steps_per_second": 195465.78182277046
+    }
+  }
+}
