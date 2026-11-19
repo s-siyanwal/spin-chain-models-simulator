@@ -101,11 +101,18 @@ def _versions():
     return {"spinchain_version":__version__,"python":platform.python_version(),"numpy":np.__version__,
         "numba":numba.__version__,"h5py":h5py.__version__,"system":f"{platform.system()} {platform.machine()}"}
 
+def render_figure(json_path,png_path=None):
+    """Redraw the figure from a saved <name>.json without rerunning any simulation (same numbers, same plot)."""
+    import json
+    with open(json_path,encoding='utf8') as f:z=json.load(f)
+    return _figure(z,png_path or os.path.splitext(json_path)[0]+'.png')
+
 def _figure(z,path):
     """Two panels: turning-angle density and tangent correlation, simulation (+-1 s.e. over seeds) against exact."""
     from matplotlib.figure import Figure  # object-oriented API: no global backend change, safe inside notebooks
+    from matplotlib.ticker import MaxNLocator
     m,r,th=z['model'],z['run'],z['theory'];res=z['results'];K=m['joint_stiffness_K']
-    fig=Figure(figsize=(12,4.9),dpi=150);ax=fig.subplots(1,2)
+    fig=Figure(figsize=(12,5.2),dpi=150,layout='constrained');ax=fig.subplots(1,2)
     e=np.asarray(res['angle_bin_edges']);c=0.5*(e[1:]+e[:-1]);h=np.asarray(res['angle_density_mean']);hs=np.asarray(res['angle_density_se_over_seeds'])
     ok=h>0;g=np.linspace(-1.7,1.7,601)
     a=ax[0];a.errorbar(c[ok],h[ok],yerr=hs[ok],fmt='o',ms=3.2,color='C0',ecolor='C0',elinewidth=0.8,capsize=0,label='simulation (mean of seeds)')
@@ -116,7 +123,8 @@ def _figure(z,path):
     a=ax[1];a.plot(n,th['tangent_correlation_exact'],color='k',lw=1.4,label=rf"exact, discrete chain: $u^n$, $\ell_p=-r_0/\ln u={th['discrete_persistence_length_r0']:.2f}\,r_0$")
     a.plot(n,th['tangent_correlation_continuum'],color='0.45',ls='--',lw=1.2,label=rf"continuum WLC: $e^{{-n r_0/\xi_P}}$, $\xi_P=\kappa/k_BT={th['continuum_xi_P_r0']:g}\,r_0$")
     a.errorbar(n,cm,yerr=cs,fmt='o',ms=3.6,color='C3',ecolor='C3',elinewidth=0.9,capsize=2,label='simulation (mean of seeds)')
-    a.set_yscale('log');a.set_xlabel(r'bond separation $n$');a.set_ylabel(r'$C(n)=\langle \mathbf{t}_i\cdot\mathbf{t}_{i+n}\rangle$')
+    a.set_yscale('log');a.xaxis.set_major_locator(MaxNLocator(integer=True))
+    a.set_xlabel(r'bond separation $n$');a.set_ylabel(r'$C(n)=\langle \mathbf{t}_i\cdot\mathbf{t}_{i+n}\rangle$')
     a.set_title(r'(b) tangent correlation along the chain',fontsize=11);a.legend(fontsize=8.5,loc='lower left',frameon=False)
     a.text(0.97,0.97,rf"$\langle\cos\theta\rangle$ = {res['mean_cos']:.5f} $\pm$ {res['mean_cos_se']:.5f}"+"\n"+
         rf"exact $I_1(K)/I_0(K)$ = {th['mean_cos_exact_I1_over_I0']:.5f}"+"\n"+rf"max $|z|$ over $n$ = {res['max_abs_z']:.2f}",
@@ -125,5 +133,5 @@ def _figure(z,path):
     fig.suptitle(f"{TITLE}\nPe = 0, N = {m['n_bonds']} bonds, $\\kappa$ = {m['kappa']:g} $k_BT\\,r_0$ (K = {K:g}, the joint stiffness of the "
         f"Fig. 2 presets), policy {m['nonbonded_policy']}, dt = {m['dt']:g} (unpublished)\n{len(r['seeds'])} seeds x {steps:,} steps after a "
         f"{r['burn_in_steps']:,}-step burn-in; error bars: $\\pm$1 standard error over seeds",fontsize=9.5)
-    fig.tight_layout(rect=(0,0,1,0.86));os.makedirs(os.path.dirname(path) or '.',exist_ok=True);fig.savefig(path)
+    os.makedirs(os.path.dirname(path) or '.',exist_ok=True);fig.savefig(path)
     return path

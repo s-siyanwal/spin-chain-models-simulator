@@ -85,6 +85,9 @@ def test_passive_wlc_check_pipeline(tmp_path):
     assert z['run']['frames_per_seed_after_burn_in']==[901,901] and 'not a paper figure' in z['note']
     r=z['results'];assert r['tangent_correlation_mean'][0]==pytest.approx(1.0) and r['z_vs_exact'][0] is None
     assert abs(r['mean_cos']-z['theory']['mean_cos_exact_I1_over_I0'])<0.01
+    from spinchain.validation import render_figure  # redraw from the JSON alone, without rerunning
+    assert render_figure(str(res/'passive_wlc_check.json'),str(tmp_path/'again.png'))==str(tmp_path/'again.png')
+    assert (tmp_path/'again.png').stat().st_size>10_000
 
 def test_passive_wlc_check_refuses_one_seed(tmp_path):
     with pytest.raises(ValueError,match='two seeds'):passive_wlc_check(out_dir=str(tmp_path),traj_dir=str(tmp_path),seeds=(1,))
