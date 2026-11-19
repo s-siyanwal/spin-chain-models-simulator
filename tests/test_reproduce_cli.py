@@ -60,3 +60,31 @@ def test_seed_flag_sets_trajectory_seed(tmp_path):
     _repro(tmp_path,T1,'--seed','12013')
     with h5py.File(tmp_path/'polymer-seed12013.h5','r') as f:
         assert __import__('json').loads(f.attrs['parameters_json'])['seed']==12013
+
+def test_stitch_shifts_a_restarted_angle_branch_by_whole_turns(tmp_path):
+    segs=_segments(tmp_path);ref=read_segments(segs[:2])[1]['ee_angle']
+    with h5py.File(segs[1],'r+') as f:f['ee_angle'][...]=f['ee_angle'][...]-4*np.pi;f.attrs['ee_angle_branch']='restarted_at_resume'
+    a,d=read_segments(segs[:2]);assert np.allclose(d['ee_angle'],ref) and a['ee_angle_branch']=='continuous'
+
+def test_stitch_refuses_a_restarted_branch_that_is_not_whole_turns(tmp_path):
+    segs=_segments(tmp_path)
+    with h5py.File(segs[1],'r+') as f:f['ee_angle'][...]=f['ee_angle'][...]+1.0;f.attrs['ee_angle_branch']='restarted_at_resume'
+    with pytest.raises(ValueError,match=r'2\*pi'):read_segments(segs[:2])
+
+def test_stitch_refuses_segments_with_a_different_cadence(tmp_path):
+    segs=_segments(tmp_path)
+    with h5py.File(segs[1],'r+') as f:f.attrs['sample_every']=999
+    with pytest.raises(ValueError,match='sample_every'):read_segments(segs[:2])
+
+def test_sample_interval_units_case_spaces_and_floor():
+    p=make('strong_spiral')
+    assert reproduce_sample_every(p,'0.25contours')==reproduce_sample_every(p,' 0.25 Contour ')==1010000
+    assert reproduce_sample_every(p,'1e-9contour')==1  # never below one step
+
+def test_paper_reproduce_refuses_without_i_know(tmp_path,capsys):
+    assert main(['paper-reproduce','--regime','polymer','--output-dir',str(tmp_path)])==2
+    assert 'Refused' in capsys.readouterr().err and not any(tmp_path.iterdir())
+
+def test_wlc_check_subcommand_defaults():
+    from spinchain.cli import parser
+    a=parser().parse_args(['wlc-check']);assert a.out_dir=='results/validation' and a.traj_dir=='output/validation'

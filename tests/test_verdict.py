@@ -43,3 +43,12 @@ def test_com_not_mean_of_positions_refused(long_run,tmp_path):
     p=tmp_path/'reset.h5';shutil.copy(long_run,p)
     with h5py.File(p,'r+') as f:f['com'][5]=np.zeros(2)
     with pytest.raises(ValueError,match='COM'):verdict(p)
+
+from verdict import describe
+
+def test_descriptions_at_the_rule_boundaries():
+    assert describe(0.5,1.0,10.0)==[]                       # fraction exactly 1/2: neither predominant nor intermittent
+    assert describe(0.9,2.5,10.0)==[]                       # mostly wound, but beta2 >= 2
+    assert describe(0.9,None,10.0)==[]                      # undefined beta2 never gives predominant
+    assert describe(0.6,1.0,1.0)==['predominant','absent']  # the rules are not mutually exclusive
+    assert describe(0.2,1.0,2.0)==['absent']                # a plateau must be longer than 2 contours
