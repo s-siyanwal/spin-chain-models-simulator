@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below, and cite the paper whose model it implements."
+title: "spin-chain-models-simulator: Brownian-dynamics toolkit for self-propelled worm-like filaments"
+abstract: >-
+  Two-dimensional overdamped Brownian dynamics of a self-propelled worm-like filament (bead-spring chain with
+  bending stiffness, excluded volume and a tangential active force), written in 2026 as an audited reproduction
+  toolkit for Isele-Holder, Elgeti and Gompper (2015). It is a model implementation and an in-progress reproduction
+  attempt, not a completed replication, and it is not the code of the author's 2020 summer project.
+authors:
+  - family-names: Siyanwal
+    given-names: Shivanshu
+version: 2.0.0
+license: MIT
+repository-code: "https://github.com/s-siyanwal/spin-chain-models-simulator"
+keywords:
+  - active matter
+  - worm-like chain
+  - semiflexible polymer
+  - Brownian dynamics
+  - spin chain
+references:
+  - type: article
+    title: "Self-propelled worm-like filaments: spontaneous spiral formation, structure, and dynamics"
+    authors:
+      - family-names: Isele-Holder
+        given-names: R. E.
+      - family-names: Elgeti
+        given-names: J.
+      - family-names: Gompper
+        given-names: G.
+    journal: "Soft Matter"
+    volume: 11
+    issue: 36
+    start: 7181
+    end: 7190
+    year: 2015
+    doi: 10.1039/c5sm01683e

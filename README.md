@@ -74,7 +74,11 @@ Small result files from these runs are kept in `results/` (verdict JSON, gate JS
 - HDF5 trajectories: the stitched 5 τ file (about 33 MB), its raw segment (about 32 MB), smoke and gate trajectories, `.npz` checkpoints and `.gif` animations (largest about 7 MB). They stay with the original working tree.
 - The original paper PDF and its arXiv source (copyrighted; fetch from the DOI above).
 - An earlier prototype (`active-polymer-simulator` v1.1–v1.5) and AI-prompt/draft files from the same folder.
-- The toolkit's original `LICENSE`, `CITATION.cff` and `MANIFEST.json`. They named a different copyright holder than this repository's owner and need review before being reintroduced; the repository `LICENSE` is the original MIT file of this repo.
+- The toolkit's original `LICENSE`, `CITATION.cff` and `MANIFEST.json`. See [Authorship](#authorship).
+
+## Authorship
+
+This toolkit is Shivanshu Siyanwal's own work, written in 2026. The toolkit's original `LICENSE` and `CITATION.cff` files, which are not in this repository, named Akanksha Singh; that name is not an authorship claim. The author is credited in [`CITATION.cff`](CITATION.cff), `pyproject.toml`, [`LICENSE`](LICENSE) and on the title pages of the two reports in `reports/`.
 
 ## License
 
