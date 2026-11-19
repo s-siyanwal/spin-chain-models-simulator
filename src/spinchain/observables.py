@@ -83,3 +83,17 @@ def longest_run_above(t,values,threshold):
             if dur>best[0] or best[1]<0:best=(dur,start,k-1)
             start=None
     return {"duration":best[0],"first":int(best[1]),"last":int(best[2]),"samples":0 if best[1]<0 else int(best[2]-best[1]+1)}
+
+# --- Passive worm-like-chain checks (validation.py). positions: (n_beads,2) or (frames,n_beads,2). ---
+def turning_angles(positions):
+    """Signed turning angle between consecutive bonds, in (-pi, pi]: the same wrapped difference of bond angles that
+    spiral_number sums. Shape (..., n_bonds-1)."""
+    b=np.diff(np.asarray(positions,float),axis=-2);phi=np.arctan2(b[...,1],b[...,0])
+    return (np.diff(phi,axis=-1)+np.pi)%(2*np.pi)-np.pi
+def tangent_correlation(positions,max_sep=None):
+    """C(n)=<t_i . t_(i+n)> for n=0..max_sep: unit bond tangents, averaged over bond pairs i and over frames. C(0)=1."""
+    b=np.diff(np.asarray(positions,float),axis=-2);t=b/np.linalg.norm(b,axis=-1,keepdims=True)
+    if t.ndim==2:t=t[None]
+    nb=t.shape[1];m=nb-1 if max_sep is None else int(max_sep)
+    if not 0<=m<nb:raise ValueError(f'max_sep must be in 0..{nb-1}, got {max_sep}')
+    return np.array([float(np.mean(np.sum(t[:,:nb-n]*t[:,n:],axis=-1))) for n in range(m+1)])
