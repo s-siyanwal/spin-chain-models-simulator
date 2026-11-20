@@ -15,7 +15,7 @@ Setup: strong_spiral (Pe = 5000, ξ_P/L = 0.2, N = 100, κ = 20, f_p = 0.5), dt 
 
 **Pass rule, the only test:** a run of consecutive saved frames with |s| > 2 lasting at least 2 contour lengths (t_last − t_first, so a one-frame spike scores 0), **and** the stored COM equals the mean of the stored positions with no reset. The rule is implemented in `observables.longest_run_above`, which has a unit test, and evaluated in `tests/formation_gate.py`. No other morphology measure is used.
 
-![gate s(t)](output/gate/gate_s_t.png)
+![gate s(t)](results/gate/gate_s_t.png)
 
 | Policy | Seed | Steps | Contours | max \|s\| | Longest \|s\|>2 run | COM == mean(positions) | Frames with \|COM\|<1e-9 after start | COM displacement | Gate |
 |---|---|---|---|---|---|---|---|---|---|

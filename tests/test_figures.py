@@ -75,3 +75,10 @@ def test_longest_run_above_scores_spike_as_zero_duration():
     from spinchain.observables import longest_run_above
     t=np.arange(100.);s=np.zeros(100);s[10]=5;s[40:71]=-2.5
     assert longest_run_above(t,s,2)=={"duration":30.0,"first":40,"last":70,"samples":31}
+
+def test_paper_bead_mapping_end_points_and_railway_bead():
+    assert [paper_bead_to_code(k,101) for k in (1,25,101)]==[100,76,0]  # REPRO_NOTE.md: paper bead 25 = code bead 76
+
+def test_film_frame_selection_stride():
+    from spinchain.visualize import select_frames
+    assert select_frames(10,200).tolist()==list(range(10)) and select_frames(401,200).tolist()==list(range(0,401,3))
