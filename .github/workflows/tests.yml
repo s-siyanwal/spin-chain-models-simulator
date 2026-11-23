@@ -15,3 +15,13 @@ jobs:
       - run: python -m pytest -q
         env:
           PYTHONPATH: src
+  notebook:
+    # Executes the reproduction notebook end to end (about 2-3 minutes; it reruns the passive-limit check).
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements-notebook.txt
+      - run: jupyter execute --timeout=1800 notebooks/reproduce.ipynb

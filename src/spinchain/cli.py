@@ -29,6 +29,8 @@ def parser():
     q=s.add_parser('analyze');q.add_argument('path');q.add_argument('--structure',action='store_true');q.add_argument('--json-out')
     q.add_argument('--window-start-tau',type=float,default=0.0);q.add_argument('--window-end-tau',type=float);q.add_argument('--window-reason')
     q=s.add_parser('visualize');q.add_argument('path');q.add_argument('--passive');q.add_argument('--out-dir',default='output/viz');q.add_argument('--fps',type=int,default=12);q.add_argument('--max-frames',type=int,default=200)
+    q=s.add_parser('wlc-check',help='passive-limit (Pe=0) check of the bending term against exact results; not a paper figure')
+    q.add_argument('--out-dir',default='results/validation');q.add_argument('--traj-dir',default='output/validation')
     s.add_parser('hardware');s.add_parser('vulkan-probe');return p
 
 def main(argv=None):
@@ -57,5 +59,12 @@ def main(argv=None):
     if a.cmd=='visualize':
         from .visualize import visualize
         pp(visualize(a.path,a.out_dir,a.passive,a.fps,a.max_frames));return 0
+    if a.cmd=='wlc-check':
+        # Fixed protocol (validation.passive_wlc_check defaults): reruns exactly the committed check, about a minute of CPU.
+        from .validation import passive_wlc_check
+        z=passive_wlc_check(out_dir=a.out_dir,traj_dir=a.traj_dir);r=z['results']
+        pp({"json":z['json'],"figure":z.get('figure'),"mean_cos":r['mean_cos'],"mean_cos_se":r['mean_cos_se'],
+            "mean_cos_exact":z['theory']['mean_cos_exact_I1_over_I0'],"max_abs_z":r['max_abs_z'],
+            "runtime_seconds":z['provenance']['runtime_seconds'],"note":z['note']});return 0
     if a.cmd=='hardware':pp(probe());return 0
     if a.cmd=='vulkan-probe':pp(probe_vulkan());return 0

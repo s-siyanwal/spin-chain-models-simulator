@@ -1,7 +1,7 @@
 # Replication plan
 
 ## Tier 1: equations and invariants
-Run `python -m pytest -q`. This validates force gradients, net active force, topology policies, counter-RNG continuation, HDF5 completion, spiral number, kurtosis, Kratky-Porod, MSD/MSR primitives, and exact duration accounting.
+Run `python -m pytest -q`. This validates force gradients, net active force, topology policies, counter-RNG continuation, HDF5 completion, spiral number, kurtosis, Kratky-Porod, MSD/MSR primitives, and exact duration accounting. Then run `python main.py wlc-check` (about 100 s), which checks the passive limit (Pe = 0) against the exact bending-angle distribution and tangent correlation of the discrete worm-like chain.
 
 ## Tier 2: qualitative Figure 2
 For Pe 200, 1000, 5000 at xiP/L=0.2 and N=100, run at least three independent seeds. Verify respectively: low winding; intermittent |s| around 2-3; predominant long-lived |s| around 4. These are qualitative checks, not the phase diagram.
